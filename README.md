@@ -45,7 +45,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="#" title="Razyel">
         <img src="https://avatars.githubusercontent.com/u/53545636?v=4" width="100px;" alt="Foto do Razyel"/><br>
         <sub>
-          <b>Steve Jobs</b>
+          <b>Razyel</b>
         </sub>
       </a>
     </td>
@@ -53,7 +53,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="#" title="Rayzor">
        <img src="https://avatars.githubusercontent.com/u/62908815?v=4" width="100px;" alt="Foto do Rayzor"/><br>
         <sub>
-          <b>Kalel</b>
+          <b>Rayzor</b>
         </sub>
       </a>
     </td>
@@ -61,7 +61,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="#" title="Derick">
        <img src="https://avatars.githubusercontent.com/u/101526290?v=4" width="100px;" alt="Foto do Derick"/><br>
         <sub>
-          <b>Kalel</b>
+          <b>Derick</b>
         </sub>
       </a>
     </td>
