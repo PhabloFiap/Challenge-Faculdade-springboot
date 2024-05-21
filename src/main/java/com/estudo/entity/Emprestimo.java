@@ -1,13 +1,16 @@
 package com.estudo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "TB_EMPRESTIMO")
+@SequenceGenerator(name="emprestimo", sequenceName = "SQ_TB_EMPRESTIMO", allocationSize = 1)
 public class Emprestimo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_emp")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emprestimo")
     private Long idEmp;
 
     @Column (name = "valor", nullable = false)
@@ -15,8 +18,9 @@ public class Emprestimo {
     @Column (name = "status")
     private String status;
 
-    @ManyToOne()
-    //@JoinColumn(name = "id")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="id_cliente", nullable = false)
+    @JsonIgnoreProperties("emprestimo")
     private Cliente cliente;
 
 
@@ -39,8 +43,23 @@ public class Emprestimo {
         this.status = status;
     }
 
+    public Long getIdEmp() {
+        return idEmp;
+    }
 
-//    public boolean calcularStatus(){
+    public void setIdEmp(Long idEmp) {
+        this.idEmp = idEmp;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    //    public boolean calcularStatus(){
 //        if (cliente.getRendaMensal()<3000 && cliente.getIdade()<21 && cliente.getScoreCredito()<500 ){
 //
 //            return true;

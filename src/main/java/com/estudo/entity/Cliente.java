@@ -1,5 +1,6 @@
 package com.estudo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -10,10 +11,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "TB_CLIENTE")
+@SequenceGenerator(name="cliente", sequenceName = "SQ_TB_CLIENTE", allocationSize = 1)
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_cliente")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cliente")
     private Long id;
 
 
@@ -34,8 +37,8 @@ public class Cliente {
 
     //@OneToMany(mappedBy = "emporestimo", cascade = CascadeType.ALL, orphanRemoval = true)
     //@JoinColumn(name = "id")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id")
+    @OneToMany(mappedBy = "cliente",cascade = CascadeType.MERGE)
+    @JsonIgnoreProperties("cliente")
     private List<Emprestimo> emprestimo = new ArrayList<>();
 
     public Cliente(String nome, int idade, double rendaMensal, int scoreCredito) {
@@ -88,4 +91,11 @@ public class Cliente {
         this.scoreCredito = scoreCredito;
     }
 
+    public List<Emprestimo> getEmprestimo() {
+        return emprestimo;
+    }
+
+    public void setEmprestimo(List<Emprestimo> emprestimo) {
+        this.emprestimo = emprestimo;
+    }
 }

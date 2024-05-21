@@ -1,7 +1,11 @@
 package com.estudo.service;
 
 import com.estudo.entity.Cliente;
+import com.estudo.entity.Emprestimo;
 import com.estudo.repository.ClienteRepository;
+import com.estudo.repository.EmprestimoRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,11 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
+
+
+
+    @Autowired
+    private EmprestimoRepository emprestimoRepository;
 
     public List<Cliente> createCliente(Cliente cliente) {
         clienteRepository.save(cliente);
@@ -47,5 +56,27 @@ public class ClienteService {
 
 
     }
+
+
+    @Transactional
+    public Cliente adicionarClienteComEmprestimos(Cliente cliente) {
+        Cliente novoCliente = clienteRepository.save(cliente);
+
+        // Verificando se há empréstimos para adicionar
+        if (cliente.getEmprestimo() != null && !cliente.getEmprestimo().isEmpty()) {
+            List<Emprestimo> emprestimos = cliente.getEmprestimo();
+
+            // Atribuindo o cliente a cada empréstimo
+
+            Emprestimo emprestimo = new Emprestimo();
+            emprestimo.setCliente(novoCliente);
+            emprestimoRepository.save(emprestimo);
+            }
+
+
+        return novoCliente;
+    }
+
+
 
 }

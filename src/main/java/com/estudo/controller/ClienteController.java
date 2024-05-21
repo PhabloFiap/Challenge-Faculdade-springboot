@@ -40,7 +40,10 @@ public class ClienteController {
         return clienteService.findbyCliente(id);
     }
 
-
+    @PostMapping("/adicionar")
+    public Cliente adicionarClienteComEmprestimos(@RequestBody Cliente cliente) {
+        return clienteService.adicionarClienteComEmprestimos(cliente);
+    }
 
 
 
